@@ -78,7 +78,10 @@ func TestGetMatchingDownloadUrl_AlreadyClosed(t *testing.T) {
 		if err != nil {
 			fmt.Println("Error opening file!!!")
 		}
-		file.Close()
+		err = file.Close()
+		if err != nil {
+			return nil, err
+		}
 		return file, nil
 	}
 	downloadUrl, err := GetMatchingDownloadUrl("-amzn.x86_64.rpm", fileReader)
@@ -197,7 +200,10 @@ func TestGetDownloadsDocument_AlreadyClosed(t *testing.T) {
 		if err != nil {
 			fmt.Println("Error opening file!!!")
 		}
-		file.Close()
+		err = file.Close()
+		if err != nil {
+			return nil, err
+		}
 		return file, nil
 	}
 	_, err := GetDownloadsDocument(fileReader)
